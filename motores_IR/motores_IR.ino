@@ -7,6 +7,7 @@ int motor1_2 = 12;
 int motor2_1 = 9;
 int motor2_2 = 8;
 void setup()
+
 {
   pinMode(motor1_1, OUTPUT);
   pinMode(motor1_2, OUTPUT);
@@ -21,33 +22,33 @@ void loop()
     Serial.println(results.value );
     irrecv.resume(); // Receive the next value
   }
-  switch(results.value)
+  switch(results.value)//escoge la orden a seguir
   {
-    case 2640445695:
+    case 2640445695://motores quietos
     digitalWrite(motor1_1,LOW);
     digitalWrite(motor1_2,LOW);
     digitalWrite(motor2_1,LOW);
     digitalWrite(motor2_2,LOW);
     break;
-    case 2640478335:
+    case 2640478335://primer motor hacia adelante y segundo hacia atras
     digitalWrite(motor1_1,HIGH);
     digitalWrite(motor1_2,LOW);
     digitalWrite(motor2_1,LOW);
     digitalWrite(motor2_2,HIGH);
     break;
-    case 2640462015:
+    case 2640462015://segundo motor hacia adelante y primero hacia atras
     digitalWrite(motor1_1,LOW);
     digitalWrite(motor1_2,HIGH);
     digitalWrite(motor2_1,HIGH);
     digitalWrite(motor2_2,LOW);  
     break;
-    case 2640494655:
+    case 2640494655://primer motor hacia adelante y segundo quieto (giro hacia la derecha)
     digitalWrite(motor1_1,HIGH);
     digitalWrite(motor1_2,LOW);
     digitalWrite(motor2_1,LOW);
     digitalWrite(motor2_2,LOW);  
     break;
-    case 2640453855:
+    case 2640453855://primer motor quieto y segundo hacia atras (giro hacia la derecha)
     digitalWrite(motor1_1,LOW);
     digitalWrite(motor1_2,LOW);
     digitalWrite(motor2_1,LOW);
