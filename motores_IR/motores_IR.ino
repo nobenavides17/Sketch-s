@@ -31,31 +31,31 @@ void loop()
     break;
     case 1:
     digitalWrite(motor1_1,HIGH);
-    digitalWrite(motor1_2,HIGH);
+    digitalWrite(motor1_2,LOW);
     digitalWrite(motor2_1,HIGH);
-    digitalWrite(motor2_2,HIGH);
+    digitalWrite(motor2_2,LOW);
     break;
     case 2:
     digitalWrite(motor1_1,LOW);
     digitalWrite(motor1_2,LOW);
-    digitalWrite(motor2_1,HIGH);
+    digitalWrite(motor2_1,LOW);
     digitalWrite(motor2_2,HIGH);   
     break;
     case 3:
     digitalWrite(motor1_1,HIGH);
-    digitalWrite(motor1_2,HIGH);
+    digitalWrite(motor1_2,LOW);
     digitalWrite(motor2_1,LOW);
     digitalWrite(motor2_2,LOW);   
     break;
     case 4:
-    digitalWrite(motor1_1,HIGH);
-    digitalWrite(motor1_2,LOW);
+    digitalWrite(motor1_1,LOW);
+    digitalWrite(motor1_2,HIGH);
     digitalWrite(motor2_1,HIGH);
     digitalWrite(motor2_2,LOW);  
     break;
     case 5:
-    digitalWrite(motor1_1,LOW);
-    digitalWrite(motor1_2,HIGH);
+    digitalWrite(motor1_1,HIGH);
+    digitalWrite(motor1_2,LOW);
     digitalWrite(motor2_1,LOW);
     digitalWrite(motor2_2,HIGH);    
     break;
