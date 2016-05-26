@@ -2,10 +2,10 @@
 int RECV_PIN = 4;
 IRrecv irrecv(RECV_PIN);
 decode_results results;
-int motor1_1 = 6;
-int motor1_2 = 8;
-int motor2_1 = 10;
-int motor2_2 = 12;
+int motor1_1 = 13;
+int motor1_2 = 12;
+int motor2_1 = 9;
+int motor2_2 = 8;
 void setup()
 {
   pinMode(motor1_1, OUTPUT);
@@ -23,41 +23,35 @@ void loop()
   }
   switch(results.value)
   {
-    case 0:
+    case 2640445695:
     digitalWrite(motor1_1,LOW);
     digitalWrite(motor1_2,LOW);
     digitalWrite(motor2_1,LOW);
     digitalWrite(motor2_2,LOW);
     break;
-    case 1:
+    case 2640478335:
     digitalWrite(motor1_1,HIGH);
-    digitalWrite(motor1_2,HIGH);
-    digitalWrite(motor2_1,HIGH);
+    digitalWrite(motor1_2,LOW);
+    digitalWrite(motor2_1,LOW);
     digitalWrite(motor2_2,HIGH);
     break;
-    case 2:
+    case 2640462015:
     digitalWrite(motor1_1,LOW);
-    digitalWrite(motor1_2,LOW);
-    digitalWrite(motor2_1,HIGH);
-    digitalWrite(motor2_2,HIGH);   
-    break;
-    case 3:
-    digitalWrite(motor1_1,HIGH);
     digitalWrite(motor1_2,HIGH);
-    digitalWrite(motor2_1,LOW);
-    digitalWrite(motor2_2,LOW);   
-    break;
-    case 4:
-    digitalWrite(motor1_1,HIGH);
-    digitalWrite(motor1_2,LOW);
     digitalWrite(motor2_1,HIGH);
     digitalWrite(motor2_2,LOW);  
     break;
-    case 5:
-    digitalWrite(motor1_1,LOW);
-    digitalWrite(motor1_2,HIGH);
+    case 2640494655:
+    digitalWrite(motor1_1,HIGH);
+    digitalWrite(motor1_2,LOW);
     digitalWrite(motor2_1,LOW);
-    digitalWrite(motor2_2,HIGH);    
+    digitalWrite(motor2_2,LOW);  
+    break;
+    case 2640453855:
+    digitalWrite(motor1_1,LOW);
+    digitalWrite(motor1_2,LOW);
+    digitalWrite(motor2_1,LOW);
+    digitalWrite(motor2_2,HIGH); 
     break;
   }
 }
