@@ -1,2 +1,0 @@
-# algoritmosgraficos
-primer archivo
