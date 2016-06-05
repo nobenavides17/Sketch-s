@@ -1,11 +1,13 @@
-#include <IRremote.h>
-int RECV_PIN = 2;
+#include <IRremote.h> //Libreria para poder hacer uso de el IR
+int RECV_PIN = 2; //Pin que se utiliza para la interrupcion
 IRrecv irrecv(RECV_PIN);
 decode_results results;
+//Pines utilizados para los motores
 volatile int motor1_1 = 13;
 volatile int motor1_2 = 12;
 volatile int motor2_1 = 9;
 volatile int motor2_2 = 8;
+//Variables requeridas para la funcion del ultrsonido
 long distancia; 
 long tiempo;
 int OUT = 6;
@@ -20,67 +22,91 @@ void setup()
   pinMode(OUT, OUTPUT);
   Serial.begin(9600);
   irrecv.enableIRIn();
-  attachInterrupt(0, loope, FALLING);
+  attachInterrupt(0, loope, FALLING);//Convocamos la interrupcion
 }
 void loop()
-{
+{ 
   digitalWrite(OUT,LOW);
-  delayMicroseconds(5);
+  delayMicroseconds(5);//Pausa de 5 segundos
   digitalWrite(OUT, HIGH);
-  delayMicroseconds(10);
+  delayMicroseconds(10); //Pausa de 10 segundos
   tiempo=pulseIn(IN, HIGH);
-  distancia= int(0.017*tiempo); 
+  distancia= int(0.017*tiempo); //Calculo de distancia en la que se encuentra el objeto detectado
   if(distancia <=10) 
   {
+    /*
+    Calculamos que si la distancia en menor o igual a 10cm los motores
+    se apagaran de lo contrario mientras un objeto este a mayor distancia
+    el carrito seguira avanzando
+    */
     digitalWrite(motor1_1, LOW);
     digitalWrite(motor1_2, LOW);
     digitalWrite(motor2_1, LOW);
     digitalWrite(motor2_2, LOW);
   }
-  Serial.print("Distancia  ");
+  Serial.print("Distancia  "); //Imprime la distancia en el monitor serial
   Serial.print(distancia);
   Serial.println(" cm");
   delay(1000);
 }
-void loope()
-{
-  if (irrecv.decode(&results)) {
-    Serial.println(results.value );
-    irrecv.resume();
-  }
-    if(results.value == 16726215)
-    {
+//Funciones generales
+void apagar(){ //Funcion de apagar el carrito
     digitalWrite(motor1_1,LOW);
     digitalWrite(motor1_2,LOW);
     digitalWrite(motor2_1,LOW);
     digitalWrite(motor2_2,LOW);
-    }
-    if(results.value == 16718055)
-    {
+}
+void adelante(){//Funcion de avanzar
     digitalWrite(motor1_1,HIGH);
     digitalWrite(motor1_2,LOW);
     digitalWrite(motor2_1,LOW);
     digitalWrite(motor2_2,HIGH);
-    }
-    if(results.value == 16730805)
-    {
+}
+
+void atras(){//Funcion de retroceder
     digitalWrite(motor1_1,LOW);
     digitalWrite(motor1_2,HIGH);
     digitalWrite(motor2_1,HIGH);
-    digitalWrite(motor2_2,LOW);  
-    }
-    if(results.value == 16716015)
-    {
+    digitalWrite(motor2_2,LOW);
+}
+void izquierda(){//Funcion de giro a la izquierda
     digitalWrite(motor1_1,HIGH);
     digitalWrite(motor1_2,LOW);
     digitalWrite(motor2_1,LOW);
     digitalWrite(motor2_2,LOW);
-    }  
-    if(results.value == 16734885)
-    {
+}
+
+void derecha(){//Funcion de giro a la derecha
     digitalWrite(motor1_1,LOW);
     digitalWrite(motor1_2,LOW);
     digitalWrite(motor2_1,LOW);
-    digitalWrite(motor2_2,HIGH); 
+    digitalWrite(motor2_2,HIGH);
+}
+
+void loope()//Funcion de la interrupcion
+{
+  if (irrecv.decode(&results)) {//Verifica el resultado
+    Serial.println(results.value );
+    irrecv.resume();
+  }
+    if(results.value == 16726215)//LLama a la funcion apagar
+    {
+      apagar();
+    }
+    if(results.value == 16718055)//LLama a la funcion adelante
+    {
+      adelante();
+    }
+    if(results.value == 16730805)//LLama a la funcion atras
+    {
+      atras();  
+    }
+    if(results.value == 16716015)//LLama a la funcion izquierda
+    {
+      izquierda();
+    }  
+    if(results.value == 16734885)//LLama a la funcion derecha
+    {
+      derecha();
     }
 }
