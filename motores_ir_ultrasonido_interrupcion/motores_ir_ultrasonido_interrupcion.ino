@@ -74,8 +74,6 @@ void izquierda(){//Funcion de giro a la izquierda
     digitalWrite(motor1_2,LOW);
     digitalWrite(motor2_1,LOW);
     digitalWrite(motor2_2,LOW);
-    delay(300);
-    digitalWrite(motor1_1, LOW);
 }
 
 void derecha(){//Funcion de giro a la derecha
@@ -83,8 +81,6 @@ void derecha(){//Funcion de giro a la derecha
     digitalWrite(motor1_2,LOW);
     digitalWrite(motor2_1,LOW);
     digitalWrite(motor2_2,HIGH);
-    delay(300);
-    digitalWrite(motor2_2, LOW);
 }
 
 void loope()//Funcion de la interrupcion
