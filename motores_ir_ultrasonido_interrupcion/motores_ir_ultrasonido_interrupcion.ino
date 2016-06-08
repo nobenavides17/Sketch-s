@@ -5,13 +5,13 @@ decode_results results;
 //Pines utilizados para los motores
 volatile int motor1_1 = 13;
 volatile int motor1_2 = 12;
-volatile int motor2_1 = 9;
-volatile int motor2_2 = 8;
+volatile int motor2_1 = 7;
+volatile int motor2_2 = 6;
 //Variables requeridas para la funcion del ultrsonido
 long distancia; 
 long tiempo;
-int OUT = 6;
-int IN = 5;
+int OUT = 8;
+int IN = 9;
 void setup()
 {
   pinMode(motor1_1, OUTPUT);
@@ -74,6 +74,8 @@ void izquierda(){//Funcion de giro a la izquierda
     digitalWrite(motor1_2,LOW);
     digitalWrite(motor2_1,LOW);
     digitalWrite(motor2_2,LOW);
+    delay(300);
+    digitalWrite(motor1_1, LOW);
 }
 
 void derecha(){//Funcion de giro a la derecha
@@ -81,6 +83,8 @@ void derecha(){//Funcion de giro a la derecha
     digitalWrite(motor1_2,LOW);
     digitalWrite(motor2_1,LOW);
     digitalWrite(motor2_2,HIGH);
+    delay(300);
+    digitalWrite(motor2_2, LOW);
 }
 
 void loope()//Funcion de la interrupcion
@@ -89,23 +93,23 @@ void loope()//Funcion de la interrupcion
     Serial.println(results.value );
     irrecv.resume();
   }
-    if(results.value == 16726215)//LLama a la funcion apagar
+    if(results.value == 61809)//LLama a la funcion apagar
     {
       apagar();
     }
-    if(results.value == 16718055)//LLama a la funcion adelante
+    if(results.value == 61737)//LLama a la funcion adelante
     {
       adelante();
     }
-    if(results.value == 16730805)//LLama a la funcion atras
+    if(results.value == 61865)//LLama a la funcion atras
     {
       atras();  
     }
-    if(results.value == 16716015)//LLama a la funcion izquierda
+    if(results.value == 61897)//LLama a la funcion izquierda
     {
       izquierda();
     }  
-    if(results.value == 16734885)//LLama a la funcion derecha
+    if(results.value == 61769)//LLama a la funcion derecha
     {
       derecha();
     }
