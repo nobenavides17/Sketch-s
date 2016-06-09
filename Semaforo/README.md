@@ -1,2 +1,0 @@
-# Semaforo
-Semaforo en Arduino
